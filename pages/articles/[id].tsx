@@ -4,23 +4,35 @@ import type {
   InferGetStaticPropsType
 } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getAllArticleIds, getArticleById } from '@/lib/articles';
 import { Article } from '@/types';
+import { ArticleDetail } from '@/components/article-detail';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type ArticlePageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 export default function ArticlePage({ article }: ArticlePageProps) {
   const router = useRouter();
 
-  // Handle fallback loading state
+  // Handle fallback loading state with professional skeleton
   if (router.isFallback) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center">
-          <p>Loading article...</p>
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <div className="space-y-8">
+          <Skeleton className="h-8 w-32" />
+          <div className="space-y-4">
+            <Skeleton className="h-12 w-3/4" />
+            <Skeleton className="h-6 w-full" />
+            <Skeleton className="h-5 w-32" />
+          </div>
+          <Skeleton className="w-full h-64 md:h-96 rounded-xl" />
+          <div className="space-y-3">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
         </div>
       </div>
     );
@@ -49,48 +61,7 @@ export default function ArticlePage({ article }: ArticlePageProps) {
         <meta name="description" content={article.description} />
       </Head>
 
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <nav className="mb-8">
-          <Link href="/" className="text-blue-600 hover:underline">
-            ← Back to articles
-          </Link>
-        </nav>
-
-        <article>
-          <header className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-            <p className="text-xl text-muted-foreground mb-4">
-              {article.description}
-            </p>
-            <time className="text-sm text-muted-foreground">
-              Published on {new Date(article.createdAt).toLocaleDateString('fr-FR', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          </header>
-
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 1024px"
-            />
-          </div>
-
-          <div className="prose prose-lg max-w-none">
-            {article.content.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </article>
-      </div>
+      <ArticleDetail article={article} />
     </>
   );
 }
