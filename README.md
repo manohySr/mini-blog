@@ -2,6 +2,11 @@
 
 Un mini site de blog démontrant les fonctionnalités avancées de Next.js avec TypeScript, ISR, et shadcn/ui.
 
+<img width="1901" height="954" alt="image" src="https://github.com/user-attachments/assets/28fad7f6-1eae-4239-b9fa-9a89959c61a5" />
+<img width="1901" height="954" alt="image" src="https://github.com/user-attachments/assets/541acdf7-7882-4af7-ae90-abd22eb209c5" />
+
+
+
 ## 🚀 Technologies Utilisées
 
 - **Next.js 16** (Pages Router)
