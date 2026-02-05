@@ -1,36 +1,160 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mini Blog - Test Technique Next.js
 
-## Getting Started
+Un mini site de blog démontrant les fonctionnalités avancées de Next.js avec TypeScript, ISR, et shadcn/ui.
 
-First, run the development server:
+## 🚀 Technologies Utilisées
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (Pages Router)
+- **TypeScript** (strict, sans `any`)
+- **shadcn/ui** avec Tailwind CSS
+- **ISR** (Incremental Static Regeneration)
+- **API Routes** (Fullstack Next.js)
+
+## 📋 Fonctionnalités
+
+### Pages Principales
+- **Page d'accueil** (`/`) - Liste des articles avec ISR
+- **Détail d'article** (`/articles/[id]`) - Pages dynamiques avec `getStaticPaths`
+
+### API Routes
+- `GET /api/articles` - Tous les articles
+- `GET /api/articles/[id]` - Article spécifique par ID
+
+### Optimisations Next.js
+- **ISR** - `getStaticProps` avec `revalidate: 60`
+- **SSG** - Pré-génération de toutes les pages d'articles
+- **next/image** - Optimisation automatique des images
+- **next/link** - Navigation côté client
+- **TypeScript** - `InferGetStaticPropsType` pour l'inférence de types
+
+## 🗂️ Structure du Projet
+
+```
+├── pages/
+│   ├── index.tsx              # Accueil avec ISR
+│   ├── articles/
+│   │   └── [id].tsx          # Pages d'articles dynamiques
+│   └── api/
+│       └── articles/         # Routes API
+├── components/
+│   ├── ui/                   # Composants shadcn/ui
+│   ├── article-card.tsx      # Carte d'article
+│   └── article-detail.tsx    # Affichage d'article complet
+├── lib/
+│   └── articles.ts           # Fonctions d'accès aux données
+├── types/
+│   └── index.ts              # Interfaces TypeScript
+└── data/
+    └── articles.json         # Données statiques
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Installation et Lancement
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Installation des dépendances
+pnpm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Lancement en mode développement
+pnpm run dev
 
-## Learn More
+# Build de production
+pnpm run build
 
-To learn more about Next.js, take a look at the following resources:
+# Lancement en production
+pnpm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📱 URLs de Test
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Accueil** : `http://localhost:3000/`
+- **Article 1** : `http://localhost:3000/articles/1`
+- **API Articles** : `http://localhost:3000/api/articles`
+- **API Article spécifique** : `http://localhost:3000/api/articles/1`
 
-## Deploy on Vercel
+## 🎯 Concepts Next.js Démontrés
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ISR (Incremental Static Regeneration)
+- Pages pré-générées au build time
+- Régénération automatique toutes les 60 secondes
+- Performance optimale + contenu frais
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Routage Dynamique
+- `getStaticPaths` avec `fallback: 'blocking'`
+- Génération à la demande pour nouveaux articles
+- Gestion des états de chargement avec `isFallback`
+
+### Optimisations
+- Images optimisées avec `next/image`
+- Navigation préchargée avec `next/link`
+- Composants réutilisables avec shadcn/ui
+
+### TypeScript
+- Typage strict sans `any`
+- `InferGetStaticPropsType` pour l'inférence automatique
+- Interfaces propres pour les données
+
+## ⚠️ Note Importante - Next.js 16 et App Router
+
+**Ce projet utilise volontairement Pages Router et `getStaticProps` selon les exigences du test technique.**
+
+### Évolution de Next.js 16
+Avec **Next.js 13+** et l'**App Router**, les méthodes `getStaticProps`, `getStaticPaths` et `getServerSideProps` sont devenues **legacy** (obsolètes) :
+
+- **Avant (Pages Router)** : `getStaticProps`, `getServerSideProps`, `getStaticPaths`
+- **Maintenant (App Router)** : `fetch()` avec options de cache, Server Components, `generateStaticParams`
+
+### Nouvelles Approches (App Router)
+```typescript
+// App Router - Next.js 16 moderne
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/articles', {
+    next: { revalidate: 60 } // ISR équivalent
+  });
+  return res.json();
+}
+
+export default async function Page() {
+  const data = await getData();
+  return <div>{/* contenu */}</div>;
+}
+```
+
+### Pourquoi Pages Router ici ?
+1. **Exigences du test** - Le test demande spécifiquement `getStaticProps` et `getStaticPaths`
+2. **Migration** - Beaucoup de projets existants utilisent encore Pages Router
+3. **Compatibilité** - Support à long terme pour les applications existantes
+
+### Migration vers App Router
+Pour migrer ce projet vers App Router moderne :
+- Remplacer `getStaticProps` par `fetch()` avec `next: { revalidate: 60 }`
+- Utiliser `generateStaticParams` au lieu de `getStaticPaths`
+- Transformer en Server Components avec `async/await`
+
+## 📝 Notes
+
+### Images
+- Les images sont générées aléatoirement par le service [Picsum Photos](https://picsum.photos/)
+- Chaque rechargement peut afficher une image différente due à la nature aléatoire de l'URL
+- Format utilisé : `https://picsum.photos/800/400?random={id}`
+
+### Données
+- Les articles sont stockés dans un fichier JSON statique (`data/articles.json`)
+- 6 articles de démonstration en français
+- Dates de création simulées pour tester le tri chronologique
+
+## 🙏 Crédits
+
+- **Images** : [Picsum Photos](https://picsum.photos/) pour les images de démonstration aléatoires
+- **UI** : [shadcn/ui](https://ui.shadcn.com/) pour les composants
+- **Icons** : [Lucide React](https://lucide.dev/) pour les icônes
+
+## 📊 Performance
+
+Le build de production génère :
+- **9 pages** pré-rendues (1 accueil + 6 articles + pages système)
+- **ISR activé** sur toutes les pages de contenu
+- **API Routes** pour les fonctionnalités fullstack
+
+---
+
+*Développé pour un test technique démontrant les capacités avancées de Next.js*
