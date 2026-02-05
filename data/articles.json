@@ -1,0 +1,52 @@
+{
+  "articles": [
+    {
+      "id": "1",
+      "title": "Getting Started with Next.js",
+      "description": "Learn the fundamentals of Next.js and how it revolutionizes React development with powerful features like SSR and ISR.",
+      "image": "https://picsum.photos/800/400?random=1",
+      "content": "Next.js is a powerful React framework that enables you to build full-stack web applications. It provides many features out of the box including server-side rendering (SSR), static site generation (SSG), and incremental static regeneration (ISR).\n\nIn this article, we'll explore the core concepts that make Next.js such a popular choice for modern web development. From routing to data fetching, Next.js simplifies many aspects of building production-ready applications.\n\nThe framework's built-in optimizations help you create fast, SEO-friendly websites without the complexity of configuring build tools and optimizations manually.",
+      "createdAt": "2024-01-15T10:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Understanding SSR vs ISR",
+      "description": "Deep dive into Server-Side Rendering and Incremental Static Regeneration to choose the right data fetching strategy.",
+      "image": "https://picsum.photos/800/400?random=2",
+      "content": "Server-Side Rendering (SSR) and Incremental Static Regeneration (ISR) are two powerful data fetching strategies in Next.js, each serving different use cases.\n\nSSR generates pages on each request, making it perfect for highly dynamic content that changes frequently. Every time a user visits the page, the server renders it with the latest data.\n\nISR, on the other hand, combines the best of SSG and SSR. Pages are pre-built at build time but can be regenerated in the background when new requests come in after a specified revalidation period. This gives you the performance benefits of static generation with the freshness of server-side rendering.",
+      "createdAt": "2024-01-20T14:15:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Image Optimization with next/image",
+      "description": "Master the next/image component for automatic image optimization, lazy loading, and responsive images.",
+      "image": "https://picsum.photos/800/400?random=3",
+      "content": "The next/image component is one of Next.js's most powerful features for web performance optimization. It provides automatic image optimization, lazy loading, and responsive image support out of the box.\n\nKey benefits include:\n- Automatic format optimization (WebP, AVIF)\n- Lazy loading by default\n- Responsive images with different sizes\n- Blur placeholder generation\n- Prevention of Cumulative Layout Shift (CLS)\n\nBy using next/image instead of regular img tags, you can significantly improve your site's Core Web Vitals and user experience.",
+      "createdAt": "2024-01-25T09:45:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "TypeScript Best Practices in Next.js",
+      "description": "Learn how to leverage TypeScript effectively in Next.js projects with proper typing and InferGetStaticPropsType.",
+      "image": "https://picsum.photos/800/400?random=4",
+      "content": "TypeScript integration in Next.js is seamless and powerful. The framework provides excellent type safety across both client and server code.\n\nKey practices include:\n- Using InferGetStaticPropsType for automatic prop typing\n- Proper API route typing with NextApiRequest and NextApiResponse\n- Creating reusable interfaces for your data models\n- Avoiding 'any' type and embracing strict TypeScript\n\nNext.js's built-in TypeScript support includes automatic type checking and intelligent code completion, making development faster and more reliable.",
+      "createdAt": "2024-02-01T16:20:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Building APIs with Next.js",
+      "description": "Explore Next.js API routes to create a full-stack application with serverless functions and proper data handling.",
+      "image": "https://picsum.photos/800/400?random=5",
+      "content": "Next.js API routes allow you to build a full-stack application within a single project. These serverless functions run on the edge and can handle various HTTP methods.\n\nAPI routes are perfect for:\n- Creating RESTful APIs\n- Handling form submissions\n- Integrating with databases\n- Authentication logic\n- Data validation and processing\n\nWith proper TypeScript support, you can ensure type safety across your entire application stack, from the database to the user interface.",
+      "createdAt": "2024-02-03T11:10:00.000Z"
+    },
+    {
+      "id": "6",
+      "title": "Performance Optimization Strategies",
+      "description": "Advanced techniques for optimizing Next.js applications including code splitting, prefetching, and caching strategies.",
+      "image": "https://picsum.photos/800/400?random=6",
+      "content": "Performance optimization in Next.js goes beyond the built-in features. Understanding how to leverage code splitting, prefetching, and caching can significantly improve your application's performance.\n\nAdvanced strategies include:\n- Dynamic imports for code splitting\n- Link prefetching for instant navigation\n- Image optimization techniques\n- Bundle analysis and optimization\n- CDN integration for static assets\n\nBy combining these techniques with Next.js's built-in optimizations, you can create lightning-fast web applications that provide excellent user experiences.",
+      "createdAt": "2024-02-05T08:30:00.000Z"
+    }
+  ]
+}
